@@ -1,0 +1,31 @@
+
+.checkbox{
+    display: block;
+    width: 1.3rem;
+    height: 1.3rem;
+    background-color: transparent;
+    border: 1px solid var(--blue-dark);
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.task{
+    width: 100%;
+    display: flex;
+    align-items: start;
+    gap: .5rem;
+    background-color: var(--gray-500);
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.taskTitle{
+    flex: 1;
+    color: var(--gray-100);
+}
+
+.removeTask{
+
+}
