@@ -3,36 +3,73 @@ import { Header } from "./components/Header";
 import styles from './App.module.css'
 import './global.css'
 import { PlusCircle } from "phosphor-react";
-import { Task } from "./components/taks";
+import { Task, TaskType } from "./components/Task";
+import { FormEvent, useState } from "react";
+
+import { v4 as uuidv4 } from 'uuid'
+
+
 
 export default function App(){
+
+
+  
+  let [task, setTask] = useState<TaskType>({id:uuidv4(), title:'', isCompleted:false});
+  let [numberOfTasks,setNumberOfTasks] = useState<number>(0);
+  let [numberOfCompletedTasks, setNumberOfCompletedTasks] = useState<number>(0);
+  let [allTasks,setAllTasks] = useState<TaskType[]>([]);
+
+  console.log(allTasks)
+
+  console.log(task)
+
+  function handleCreateTask(event: FormEvent){
+    
+    event.preventDefault()
+
+    if(task.title?.trim() == ''){
+      return;
+    }
+
+    setAllTasks([...allTasks, task]);
+    setTask({id:uuidv4(), title:'', isCompleted:false});
+    setNumberOfTasks(allTasks.length + 1)
+  }
+
   return (
+
     <div>
       <Header/>
       <div className={styles.container}>
 
-        <div className={styles.addTaskContainer}>
-          <input type="text" placeholder="Adicione uma Tarefa"/>
-          <button>Criar <PlusCircle size={20}/></button>
-        </div>
+        <form className={styles.addTaskContainer} onSubmit={handleCreateTask}>
+          <input type="text" placeholder="Adicione uma Tarefa" onChange={e => setTask({...task,title:e.target.value})} value={task.title}/>
+          <button type="submit">
+            Criar <PlusCircle size={20}/>
+          </button>
+        </form>
 
         <div className={styles.taskContainer}>
           <header>
             <div className={styles.tarefasCriadas}>
               <span>Tarefas criadas</span>
-              <span>0</span>
+              <span>{numberOfTasks}</span>
             </div>
 
             <div className={styles.tarefasConcluidas}>
               <span>Concluidas</span>
-              <span>0</span>
+              <span>{numberOfCompletedTasks}</span>
             </div>
           </header>
 
-
           <main>
-            <Task/>
-            <Task/>
+            {
+              allTasks.map((task) => {
+                return (
+                  <Task task={task} key={task.id}/>
+                )
+              })
+            }
           </main>
         </div>
 
