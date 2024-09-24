@@ -4,9 +4,9 @@ import styles from './Task.module.css'
 
 
 export interface TaskType{
-    id?:number;
-    title?:string;
-    isCompleted?: boolean;
+    id:string;
+    title:string;
+    isCompleted: boolean;
 }
 
 interface TaskProps{

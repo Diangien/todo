@@ -16,7 +16,7 @@ export default function App(){
   
   let [task, setTask] = useState<TaskType>({id:uuidv4(), title:'', isCompleted:false});
   let [numberOfTasks,setNumberOfTasks] = useState<number>(0);
-  let [numberOfCompletedTasks, setNumberOfCompletedTasks] = useState<number>(0);
+  //let [numberOfCompletedTasks, setNumberOfCompletedTasks] = useState<number>(0);
   let [allTasks,setAllTasks] = useState<TaskType[]>([]);
 
   console.log(allTasks)
@@ -58,7 +58,7 @@ export default function App(){
 
             <div className={styles.tarefasConcluidas}>
               <span>Concluidas</span>
-              <span>{numberOfCompletedTasks}</span>
+              <span>0</span>
             </div>
           </header>
 
