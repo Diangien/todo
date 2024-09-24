@@ -11,11 +11,17 @@ export interface TaskType{
 
 interface TaskProps{
     task: TaskType;
+    onDeleteTask: (taskToDelete:TaskType) => void;
 }
 
 
 
-export function Task({task}:TaskProps){
+export function Task({task, onDeleteTask}:TaskProps){
+
+    function handleDeleteTask(){
+        onDeleteTask(task)
+    }
+
     return(
         <div className={styles.task}>
           
@@ -26,7 +32,7 @@ export function Task({task}:TaskProps){
                 {task.title}
             </div>
 
-            <div className={styles.removeTask}>
+            <div className={styles.removeTask} onClick={handleDeleteTask} title="Deletar Tarefa😊">
                 <Trash size={24}/>
             </div>
         </div>

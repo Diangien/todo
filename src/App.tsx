@@ -19,9 +19,6 @@ export default function App(){
   //let [numberOfCompletedTasks, setNumberOfCompletedTasks] = useState<number>(0);
   let [allTasks,setAllTasks] = useState<TaskType[]>([]);
 
-  console.log(allTasks)
-
-  console.log(task)
 
   function handleCreateTask(event: FormEvent){
     
@@ -36,6 +33,14 @@ export default function App(){
     setNumberOfTasks(allTasks.length + 1)
   }
 
+  function deleteTask(taskToDelete:TaskType){
+
+    const allTasksWithRemovedTask = allTasks.filter(task => task.id !== taskToDelete.id)
+    
+    setAllTasks(allTasksWithRemovedTask);
+    setNumberOfTasks(allTasks.length - 1)
+  }
+
   return (
 
     <div>
@@ -43,10 +48,13 @@ export default function App(){
       <div className={styles.container}>
 
         <form className={styles.addTaskContainer} onSubmit={handleCreateTask}>
+
           <input type="text" placeholder="Adicione uma Tarefa" onChange={e => setTask({...task,title:e.target.value})} value={task.title}/>
+
           <button type="submit">
             Criar <PlusCircle size={20}/>
           </button>
+
         </form>
 
         <div className={styles.taskContainer}>
@@ -58,7 +66,7 @@ export default function App(){
 
             <div className={styles.tarefasConcluidas}>
               <span>Concluidas</span>
-              <span>0</span>
+              <span>0 de {numberOfTasks}</span>
             </div>
           </header>
 
@@ -66,7 +74,7 @@ export default function App(){
             {
               allTasks.map((task) => {
                 return (
-                  <Task task={task} key={task.id}/>
+                  <Task task={task} key={task.id} onDeleteTask={deleteTask}/>
                 )
               })
             }
