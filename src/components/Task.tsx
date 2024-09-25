@@ -1,6 +1,6 @@
 import { Trash } from "phosphor-react";
-
 import styles from './Task.module.css'
+
 
 
 export interface TaskType{
@@ -9,32 +9,41 @@ export interface TaskType{
     isCompleted: boolean;
 }
 
-interface TaskProps{
+type TaskProps = {
     task: TaskType;
     onDeleteTask: (taskToDelete:TaskType) => void;
+    onCompleteTask : (taskToComplete: TaskType, isCompleted:boolean) => void;
 }
 
 
 
-export function Task({task, onDeleteTask}:TaskProps){
+export function Task({task, onDeleteTask, onCompleteTask}:TaskProps){
 
+    
     function handleDeleteTask(){
         onDeleteTask(task)
     }
 
+    function handleCompleteTask(event: React.ChangeEvent<HTMLInputElement>){
+        onCompleteTask(task, event.target.checked)
+    }
+
     return(
-        <div className={styles.task}>
+        <section className={styles.task}>
           
-            <input type="checkbox" className={styles.checkbox}/>
+            <div className={styles.checkbox}>
+                <input type="checkbox"  onChange={handleCompleteTask} id={task.id}/>
+                <label htmlFor={task.id}></label>
+            </div>
            
 
-            <div className={styles.taskTitle}>
+            <div className={styles.taskTitle} >
                 {task.title}
             </div>
 
             <div className={styles.removeTask} onClick={handleDeleteTask} title="Deletar Tarefa😊">
                 <Trash size={24}/>
             </div>
-        </div>
+        </section>
     )
 }
