@@ -10,14 +10,10 @@ import { v4 as uuidv4 } from 'uuid'
 
 export default function App(){
 
-
-  
   let [task, setTask] = useState<TaskType>({id:uuidv4(), title:'', isCompleted:false});
   let [numberOfTasks,setNumberOfTasks] = useState<number>(0);
   let [numberOfCompletedTasks, setNumberOfCompletedTasks] = useState<number>(0);
   let [allTasks,setAllTasks] = useState<TaskType[]>([]);
-
-  
 
   function handleCreateTask(event: FormEvent){
     
