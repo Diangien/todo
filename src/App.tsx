@@ -64,7 +64,7 @@ export default function App(){
 
         <form className={styles.addTaskContainer} onSubmit={handleCreateTask}>
 
-          <input type="text" placeholder="Adicione uma Tarefa" onChange={e => setTask({...task,title:e.target.value})} value={task.title}/>
+          <input type="text" placeholder="Adicione uma Tarefa" onChange={e => setTask({...task,title:e.target.value})} value={task.title} maxLength={80}/>
 
           <button type="submit">
             Criar <PlusCircle size={20}/>
